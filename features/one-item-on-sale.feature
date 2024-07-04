@@ -7,3 +7,7 @@ Feature: One item on sale check
     And I click on the buy button of "Игра престолов" item
     Then The basket icon should display 1 items
 
+    When I click on the basket icon
+    Then I should see the following items in the basket dropdown
+    |Игра престолов|- 285 р.|1|
+

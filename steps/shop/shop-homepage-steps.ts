@@ -21,5 +21,10 @@ class ShopHomepageSteps{
     public async theBasketIconShouldDisplayItems(count:number):Promise<void> {
         return playwrightExpect(await this.shopHomepagePage.getBasketItemsCount()).toEqual(count);
     }
+
+    @when(/^I click on the basket icon$/)
+    public async clickOnTheBasketIcon():Promise<void> {
+        return this.shopHomepagePage.clickOnTheBasket();
+    }
 }
 export = ShopHomepageSteps

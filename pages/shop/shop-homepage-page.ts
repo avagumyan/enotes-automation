@@ -42,11 +42,11 @@ export class ShopHomepagePage{
      * This method returns items count in the basket
      */
     public async getBasketItemsCount():Promise<number>{
-        let count = await this.basketItemsCountLocator.innerText();
+        let count = await this.basketItemsCountLocator.innerText({timeout:300});
         return parseInt(count,10);
     }
 
     public async clickOnTheBasket():Promise<void>{
-
+        return this.basketIcon.click();
     }
 }
