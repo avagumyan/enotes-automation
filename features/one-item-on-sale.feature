@@ -1,4 +1,4 @@
-@enotes_one_item @enotes
+@enotes_one_item @enotes @clearBasket
 Feature: One item on sale check
   Scenario: One item on sale check
     Given I open Enotes login page
