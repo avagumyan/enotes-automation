@@ -6,7 +6,12 @@ export class BasketDropdownPage{
     }
 
     private basketItemsList = this.page.locator('.list-group');
+    private basketPrice = this.page.locator('.basket_price');
+    private goToBasket = this.page.locator('[aria-labelledby="dropdownBasket"]').locator('.btn-primary');
 
+    /**
+     * This method returns the list of items in basket with price and count
+     */
     public async getBasketItemsList(): Promise<Array<Array<string>>> {
         let allItemsArray: Array<Array<string>> = [];
 
@@ -26,5 +31,47 @@ export class BasketDropdownPage{
         }
 
         return allItemsArray;
+    }
+
+    /**
+     * This method returns total price of basket
+     */
+    public async getTotalPrice():Promise<string>{
+        const basketPrice = await this.basketPrice.textContent();
+        if(basketPrice == null){
+            throw new Error('Basket price is not visible');
+        }
+        return basketPrice;
+    }
+
+    /**
+     * This method sums all items prices in basket and returns total
+     */
+    public async sumBasketItemPrices():Promise<string>{
+        const basketItemsPrices: Locator[] = await this.basketItemsList.locator('.basket-item-price').all();
+
+        let total = 0;
+
+        for (const item of basketItemsPrices) {
+            const priceText = await item.textContent();
+            if (priceText) {
+                const match = priceText.match(/(\d+)/);
+                if (match) {
+                    total += parseInt(match[1], 10);
+                } else {
+                    console.error('Unable to extract numeric value from basket item price:', priceText);
+                }
+            } else {
+                console.error('Basket item price is not visible or empty');
+            }
+        }
+        return total.toString();
+    }
+
+    /**
+     * This method clicks on go to basket button
+     */
+    public async clickOnGoToBasket():Promise<void>{
+        return this.goToBasket.click();
     }
 }

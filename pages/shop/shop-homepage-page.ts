@@ -24,7 +24,7 @@ export class ShopHomepagePage{
      * @param quantity - quantity to fill
      * @param itemName - the name of the item
      */
-    public async fillItemQuantity(quantity:number,itemName:string){
+    public async fillItemCount(quantity:number,itemName:string){
         let itemBlock = await this.getItemBlock(itemName);
         return itemBlock.locator('[name="product-enter-count"]').fill(quantity.toString());
     }
@@ -42,11 +42,19 @@ export class ShopHomepagePage{
      * This method returns items count in the basket
      */
     public async getBasketItemsCount():Promise<number>{
-        let count = await this.basketItemsCountLocator.innerText({timeout:300});
+        let count = await this.basketItemsCountLocator.innerText({timeout:1500});
         return parseInt(count,10);
     }
 
     public async clickOnTheBasket():Promise<void>{
         return this.basketIcon.click();
+    }
+
+    /**
+     * This method is used for pagination in homepage
+     * @param page - page to go
+     */
+    public async goToPage(page:number):Promise<void>{
+        return this.page.locator('.page-link',{hasText:page.toString()}).click();
     }
 }

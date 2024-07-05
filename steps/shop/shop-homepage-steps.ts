@@ -7,9 +7,9 @@ import {expect as playwrightExpect} from "@playwright/test";
 class ShopHomepageSteps{
     private shopHomepagePage = new ShopHomepagePage(page);
 
-    @when(/^I fill (\d+) value in the quantity field of "([^"]*)" item$/)
+    @when(/^I fill (\d+) value in the count field of "([^"]*)" item$/)
     public async fillValueInQuantityFieldOfItem(count:number,itemName:string):Promise<void> {
-        return this.shopHomepagePage.fillItemQuantity(count,itemName);
+        return this.shopHomepagePage.fillItemCount(count,itemName);
     }
 
     @when(/^I click on the buy button of "([^"]*)" item$/)
@@ -25,6 +25,11 @@ class ShopHomepageSteps{
     @when(/^I click on the basket icon$/)
     public async clickOnTheBasketIcon():Promise<void> {
         return this.shopHomepagePage.clickOnTheBasket();
+    }
+
+    @when(/^I go to (\d+) page$/)
+    public async goToPage(page:number):Promise<void> {
+        return this.shopHomepagePage.goToPage(page);
     }
 }
 export = ShopHomepageSteps
