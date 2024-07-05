@@ -76,9 +76,7 @@ export class Hooks {
                 data: { response: true }
             });
 
-            if (clearBasketResponse.ok()) {
-                console.log('Basket cleared successfully');
-            } else {
+            if (!clearBasketResponse.ok()) {
                 console.error('Failed to clear basket', clearBasketResponse.status());
             }
         } catch (error) {
